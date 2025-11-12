@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sujal Dhoke — VAPT Analyst</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{
+      --bg:#050406;
+      --card:#0b0b0d;
+      --muted:#9a9aa0;
+      --neon:#39ff14; /* default neon */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:#eaeaea;-webkit-font-smoothing:antialiased}
+
+    /* layout */
+    .wrap{max-width:1100px;margin:40px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .pfp{width:64px;height:64px;border-radius:12px;padding:4px;background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 6px 30px rgba(0,0,0,0.6);border:2px solid rgba(255,255,255,0.03);}
+    .brand h1{margin:0;font-size:18px;letter-spacing:0.4px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+      nav{display:flex;gap:12px;align-items:center}
+    .navlink{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;transition:all .25s}
+    .navlink:hover{color:var(--neon);transform:translateY(-2px)}
+    .theme-btn{
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .theme-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px var(--neon);
+    }    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-top:36px}
+  /* hero intro — match horizontal padding with other sections for alignment */
+  .intro{padding:28px 24px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.00));border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+    .title{font-size:28px;margin:0 0 6px 0}
+    .title .neon{color:var(--neon);text-shadow:0 0 18px rgba(0,0,0,0.2),0 0 26px var(--neon)}
+    .role{margin:0;color:var(--muted);}
+    .cta-row{display:flex;gap:12px;margin-top:18px}
+    .btn{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      padding:10px 14px;
+      border-radius:10px;
+      color:#fff;
+      cursor:pointer;
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+      box-shadow:0 6px 20px rgba(0,0,0,0.6);
+      text-decoration:none
+    }
+    .btn:hover{
+      transform:translateY(-3px);
+      border-color: var(--neon);
+      box-shadow: 0 0 15px var(--neon);
+    }
+    .btn.primary{border-color:var(--neon);box-shadow:0 6px 30px rgba(0,0,0,0.6),0 0 28px rgba(0,0,0,0.25);}
+    .btn.primary:hover {
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6), 0 0 28px var(--neon);
+    }
+    .btn.primary .glow{display:inline-block;padding:2px 6px;border-radius:6px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));}
+
+  /* right card */
+  .card{padding:18px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.00));border-radius:12px;border:1px solid #2b2b2b;transition:all .25s}
+    .pfp-large{
+      width:100%;
+      height:auto;
+      border-radius:12px;
+      display:block;
+      border: 2px solid var(--neon);
+      box-shadow: 0 0 15px var(--neon);
+      transition: border-color 0.4s, box-shadow 0.4s;
+    }
+
+    /* small intro profile card */
+    .mini-card{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid #2b2b2b;
+      background:linear-gradient(180deg,rgba(255,255,255,0.005),rgba(255,255,255,0.00));
+    }
+    .mini-card .mini-pfp{
+      width:72px;
+      height:72px;
+      border-radius:10px;
+      overflow:hidden;
+    }
+
+    /* sections */
+    section{
+      margin-top:28px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 24px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .panel{
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.00));
+      border:1px solid #2b2b2b;
+      transition: all 0.3s ease;
+    }
+    .panel:hover {
+      border: 2px solid var(--neon);
+      box-shadow: 0 0 15px var(--neon);
+      transform: translateY(-2px);
+    }
+
+    /* skills */
+    .skill{margin-bottom:12px}
+    .skill-name{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .bar{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;margin-top:8px;overflow:hidden}
+    .bar > i{display:block;height:100%;border-radius:999px;width:0;box-shadow:0 6px 20px rgba(0,0,0,0.6);transition:width 1s cubic-bezier(0.2,0.9,0.2,1);background:linear-gradient(90deg,transparent 0%,var(--neon) 60%)}
+
+    /* writeups */
+    .writeups-list{display:grid;grid-template-columns:1fr;gap:20px}
+    .writeup{display:flex;gap:12px;align-items:center;padding:8px 0}
+    .chip{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:13px}
+    #writeups .panel{min-height:280px}
+
+    /* contact */
+    .contact-row{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+    .socials{display:flex;gap:10px}
+    .socials a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.03);
+      text-decoration:none;
+      color:#fff;
+      font-size: 16px;
+      transition: all 0.25s;
+    }
+    #contact .panel{min-height:180px}
+    .socials a:hover {
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+
+    /* footer */
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* neon accent transitions */
+    .neon-anim{transition:box-shadow .4s,color .4s}
+
+    /* responsive */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:600px){
+      .wrap{padding:16px;margin:20px auto}
+      .brand h1{font-size:16px}
+      .pfp{width:52px;height:52px}
+      .grid{grid-template-columns:1fr}
+      section{padding:0 16px}
+    }
+
+    /* small animations */
+    .float{animation:floaty 4s ease-in-out infinite}
+    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+
+    /* mobile responsive */
+    @media(max-width:720px){
+      .navlink{display: none}
+      .theme-btn{margin-left:4px}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img class="pfp" src="pfp.png" alt="Sujal PFP">
+        <div>
+          <h1>Sujal Dhoke</h1>
+          <!-- <p>VAPT Analyst</p> -->
+        </div>
+      </div>
+      <nav>
+        <a class="navlink" href="#home">Home</a>
+        <a class="navlink" href="#skills">Skills</a>
+        <a class="navlink" href="#writeups">Writeups</a>
+        <a class="navlink" href="#contact">Contact</a>
+        <button class="theme-btn" id="colorBtn" title="Change Theme Color"><i class="fa-solid fa-droplet"></i></button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="intro">
+          <h2 class="title">Hello, I'm <span class="neon">Sujal</span></h2>
+          <p class="role">VAPT Analyst — I research vulnerabilities, write PoCs and build tools to make systems safer.</p>
+
+          <div class="cta-row">
+            <a class="btn" href="#writeups">See Writeups</a>
+            <a class="btn" href="mailto:dhksujal@gmail.com">Email Me</a>
+          </div>
+
+          <div style="margin-top:18px">
+            <div class="mini-card">
+              <div class="mini-pfp"><img src="pfp.png" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+              <div>
+                <div style="font-weight:600">Sujal Dhoke</div>
+                <div style="color:var(--muted);font-size:13px">VAPT Analyst • Cybersecurity Enthusiast</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card float">
+          <img class="pfp-large" src="pfp.png" alt="pfp">
+          <div style="margin-top:12px;color:var(--muted);font-size:13px"></div>
+        </aside>
+      </section>
+
+      <section id="skills">
+        <h3 style="margin:6px 0">Skills</h3>
+        <div class="grid">
+          <div class="panel">
+            <div class="skill">
+              <div class="skill-name"><span>Web Penetration</span><span>90%</span></div>
+              <div class="bar"><i data-width="90%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-name"><span>Network Security</span><span>75%</span></div>
+              <div class="bar"><i data-width="75%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-name"><span>Reverse Engineering</span><span>55%</span></div>
+              <div class="bar"><i data-width="55%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-name"><span>Tooling / Scripting</span><span>82%</span></div>
+              <div class="bar"><i data-width="82%"></i></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h4 style="margin:0 0 12px 0">Technologies</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <div class="chip">Burp Suite</div>
+              <div class="chip">Nmap</div>
+              <div class="chip">Metasploit</div>
+              <div class="chip">Wireshark</div>
+              <div class="chip">Python</div>
+              <div class="chip">Bash</div>
+              <div class="chip">Nessus</div>
+            </div>
+            <div style="height:12px"></div>
+            <small style="color:var(--muted)"></small>
+          </div>
+
+          <div class="panel">
+            <h4 style="margin:0 0 12px 0">About</h4>
+            <p style="margin:0;color:var(--muted);line-height:1.5">I focus on vulnerability research, practical exploit development and improving security posture for web apps and networks. I enjoy writing detailed writeups to share knowledge with the community.</p>
+          </div>
+        </div>
+  </section>
+
+  <section id="writeups">
+        <h3 style="margin:6px 0">Writeups</h3>
+        <div class="grid">
+          <div class="panel writeups-list">
+            <div class="writeup"><div class="chip">2025</div><div><strong>Blind SQLi in legacy login</strong><div style="color:var(--muted);font-size:13px">Step-by-step exploitation and remediation</div></div></div>
+            <div class="writeup"><div class="chip">2025</div><div><strong>Server-Side Request Forgery (SSRF)</strong><div style="color:var(--muted);font-size:13px">PoC and detection techniques</div></div></div>
+            <div class="writeup"><div class="chip">2024</div><div><strong>Insecure File Upload</strong><div style="color:var(--muted);font-size:13px">Hardening uploads and file-type validation</div></div></div>
+          </div>
+
+          <div class="panel">
+            <h4 style="margin:0 0 8px 0">Featured</h4>
+            <div style="font-weight:600">Phishing Email Detector (SaaS)</div>
+            <div style="color:var(--muted);font-size:13px">Built a prototype with ML-assisted classification and a clean UI.</div>
+          </div>
+
+          <div class="panel">
+            <h4 style="margin:0 0 8px 0">Publications</h4>
+            <div style="color:var(--muted);font-size:13px">Links to external writeups, blog posts or GitHub repos can go here.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h3 style="margin:6px 0">Contact</h3>
+        <div class="grid">
+          <div class="panel">
+            <div class="contact-row">
+              <div style="flex:1">
+                <p style="margin:0 0 6px 0;color:var(--muted)">Email</p>
+             <a href="mailto:dhksujal@gmail.com" style="color:#fff;text-decoration:none;font-size:15px;transition:all 0.3s ease" onmouseover="this.style.color='var(--neon)'" onmouseout="this.style.color='#fff'">dhksujal@gmail.com</a>
+              </div>
+              <div style="width:12px"></div>
+            </div>
+
+            <div style="margin-top:12px;color:var(--muted)">Or reach me on:</div>
+            <div style="margin-top:10px" class="socials">
+              <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+              <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+          <div class="panel" style="height:180px;overflow:hidden;border:1px solid #2b2b2b;">
+            <img src="gif_card.gif" alt="Animated Card" style="width:100%;height:100%;object-fit:cover;border-radius:12px;display:block">
+          </div>
+
+          <div class="panel">
+            <h4 style="margin:0 0 8px 0">Location</h4>
+            <div style="color:var(--muted);font-size:13px">India • Open to internships & collaboration</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      © <span id="year">2025</span> Sujal Dhoke 
+    </footer>
+  </div>
+
+  <script>
+    // small utilities
+    const roots = document.documentElement.style;
+    const neonColors = ['#39ff14','#00e5ff','#ff2d95','#9b59ff','#ffd166','#00ffa3'];
+    let current = 0;
+    const btn = document.getElementById('colorBtn');
+    btn.addEventListener('click',()=>{
+      current = (current+1) % neonColors.length;
+      roots.setProperty('--neon', neonColors[current]);
+      // pulse animation on button
+      btn.classList.add('neon-anim');
+      setTimeout(()=>btn.classList.remove('neon-anim'),420);
+      // animate bars to recolor gradient by forcing reflow
+      document.querySelectorAll('.bar > i').forEach(i=>{ i.style.background = `linear-gradient(90deg, transparent 0%, ${neonColors[current]} 60%)` })
+    })
+
+    // fill skill bars on load
+    window.addEventListener('load',()=>{
+      document.querySelectorAll('.bar > i').forEach(el=>{
+        const w = el.getAttribute('data-width') || '60%';
+        setTimeout(()=>{ el.style.width = w },150);
+      })
+      // set year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })
+
+    // contact form demo (no backend) - prevents default and shows a note
+    document.getElementById('contactForm').addEventListener('submit', e=>{
+      e.preventDefault();
+      document.getElementById('formNote').textContent = 'Thanks! This demo doesn\'t send messages — replace with your backend or mailto integration.';
+    })
+
+    // smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',(e)=>{
+        const href = a.getAttribute('href');
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      })
+    })
+  </script>
+</body>
+</html>
