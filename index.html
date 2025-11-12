@@ -161,6 +161,8 @@
     .socials a:hover {
       background: rgba(255,255,255,0.05);
       transform: translateY(-2px);
+    .skill-name{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .bar{height:10px;background:rgba(255,255,255,0.04);border-r
     }
 
     /* footer */
@@ -179,7 +181,7 @@
       .brand h1{font-size:16px}
       .pfp{width:52px;height:52px}
       .grid{grid-template-columns:1fr}
-      section{padding:0 16px}You can find (just about) anything on Medium — apparently even a page that doesn’t exist. Maybe these stories will take you somewhere new?
+      section{padding:0 16px}
     }
 
     /* small animations */
@@ -187,6 +189,9 @@
     @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 
     /* mobile responsive */
+    }
+    @media(max-width:600px){
+      .wrap{padding:16px;margin:20px auto}
     @media(max-width:720px){
       .navlink{display: none}
       .theme-btn{margin-left:4px}
