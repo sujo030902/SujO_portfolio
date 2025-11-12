@@ -139,6 +139,14 @@
     .writeups-list{display:grid;grid-template-columns:1fr;gap:20px}
     .writeup{display:flex;gap:12px;align-items:center;padding:8px 0}
     .chip{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:13px}
+  /* technology chips: add neon border and hover */
+  .chip{border:1px solid rgba(255,255,255,0.04);transition:border-color .25s,box-shadow .25s}
+  .chip:hover{border-color:var(--neon);box-shadow:0 6px 20px rgba(0,0,0,0.45),0 0 12px var(--neon)}
+  /* skill pills */
+  .skill-pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.02);color:#fff;border:1px solid rgba(255,255,255,0.04);transition:border-color .25s,box-shadow .25s,transform .15s;font-weight:400}
+  .pill:hover{border-color:var(--neon);box-shadow:0 6px 20px rgba(0,0,0,0.45),0 0 12px var(--neon);transform:translateY(-3px)}
+  /* removed percent badges from pills as requested */
     #writeups .panel{min-height:280px}
 
     /* contact */
@@ -161,8 +169,58 @@
     .socials a:hover {
       background: rgba(255,255,255,0.05);
       transform: translateY(-2px);
-    .skill-name{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
-    .bar{height:10px;background:rgba(255,255,255,0.04);border-r
+    }
+
+    /* footer */
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* neon accent transitions */
+    .neon-anim{transition:box-shadow .4s,color .4s}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:720px){
+      /* keep header on a single row and vertically center items so the theme button aligns with the logo */
+      header{flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
+      nav{width:auto;display:flex;justify-content:flex-end;align-items:center;gap:8px}
+      .navlink{display:none}
+      .theme-btn{margin-left:0}
+    }
+    @media (max-width:600px){
+      /* tighter mobile spacings */
+      .wrap{padding:8px;margin:12px auto}
+      .brand h1{font-size:16px}
+      .pfp{width:48px;height:48px}
+      .grid{grid-template-columns:1fr}
+      section{padding:0 12px}
+      /* reduce internal paddings for compact mobile layout */
+      .intro{padding:18px 12px}
+      .panel{padding:12px}
+      .cta-row{gap:8px}
+      /* hide large profile picture on small screens to improve mobile layout */
+      .pfp-large{display:none !important}
+      /* hide the whole right-side profile card in the hero to avoid empty container on small screens */
+      .hero .card{display:none !important}
+    }
+
+    /* publications link styling */
+    .panel .publication-link{
+      color: #fff;
+      text-decoration: none;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 18px;
+      border-bottom: 1px dashed rgba(255,255,255,0.04);
+      padding-bottom: 2px;
+      transition: color .2s ease, border-color .2s ease;
+    }
+    .panel .publication-link:hover{
+      color: var(--neon);
+      border-color: var(--neon);
+      text-decoration: none;
     }
 
     /* footer */
@@ -187,15 +245,7 @@
     /* small animations */
     .float{animation:floaty 4s ease-in-out infinite}
     @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
-
-    /* mobile responsive */
-    }
-    @media(max-width:600px){
-      .wrap{padding:16px;margin:20px auto}
-    @media(max-width:720px){
-      .navlink{display: none}
-      .theme-btn{margin-left:4px}
-    }
+    
 
   </style>
 </head>
@@ -250,21 +300,11 @@
         <h3 style="margin:6px 0">Skills</h3>
         <div class="grid">
           <div class="panel">
-            <div class="skill">
-              <div class="skill-name"><span>Web Penetration</span><span>90%</span></div>
-              <div class="bar"><i data-width="90%"></i></div>
-            </div>
-            <div class="skill">
-              <div class="skill-name"><span>Network Security</span><span>75%</span></div>
-               <div class="bar"><i data-width="90%"></i></div>
-            </div>
-            <div class="skill">
-              <div class="skill-name"><span>Reverse Engineering</span><span>55%</span></div>
-              <div class="bar"><i data-width="55%"></i></div>
-            </div>
-            <div class="skill">
-              <div class="skill-name"><span>Tooling / Scripting</span><span>82%</span></div>
-              <div class="bar"><i data-width="82%"></i></div>
+            <div class="skill-pills">
+              <div class="pill">Web Penetration</div>
+              <div class="pill">Network Security</div>
+              <div class="pill">Reverse Engineering</div>
+              <div class="pill">Tooling / Scripting</div>
             </div>
           </div>
 
@@ -308,7 +348,7 @@
           <div class="panel">
             <h4 style="margin:0 0 8px 0">Publications</h4>
             <div style="color:var(--muted);font-size:13px">
-              <a href ="https://medium.com/@dhksujal03/wgel-thm-writeup-66d12062822e"> Wgel THM WriteUp </a>
+              <a class="publication-link" href="https://medium.com/@dhksujal03/wgel-thm-writeup-66d12062822e" target="_blank" rel="noopener noreferrer">Wgel THM WriteUp</a>
             </div>
           </div>
         </div>
@@ -379,10 +419,14 @@
     })
 
     // contact form demo (no backend) - prevents default and shows a note
-    document.getElementById('contactForm').addEventListener('submit', e=>{
-      e.preventDefault();
-      document.getElementById('formNote').textContent = 'Thanks! This demo doesn\'t send messages — replace with your backend or mailto integration.';
-    })
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', e=>{
+        e.preventDefault();
+        const noteEl = document.getElementById('formNote');
+        if(noteEl) noteEl.textContent = 'Thanks! This demo doesn\'t send messages — replace with your backend or mailto integration.';
+      })
+    }
 
     // smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
