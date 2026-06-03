@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sujo030902.github.io/SujO_portfolio/sitemap.xml
