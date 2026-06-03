@@ -285,6 +285,24 @@
       transform: translateX(4px);
     }
 
+    .drawer-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 32px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .drawer-close:hover {
+      color: var(--orange);
+      transform: scale(1.1);
+    }
+
     /* Scrollable Content Column */
     main.content-area {
       flex: 1;
@@ -835,6 +853,7 @@
 
     <!-- Slide-in Mobile Drawer overlay -->
     <div class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="drawerClose" aria-label="Close Navigation Menu">&times;</button>
       <nav class="mobile-drawer-links" id="mobileNav">
         <a href="#home" class="active">Home</a>
         <a href="#skills">Skills</a>
@@ -1074,6 +1093,16 @@
         }
       });
     });
+
+    // Close button event listener
+    const drawerClose = document.getElementById('drawerClose');
+    if (drawerClose) {
+      drawerClose.addEventListener('click', () => {
+        if (mobileDrawer.classList.contains('open')) {
+          toggleMenu();
+        }
+      });
+    }
 
     // Scroll Spy for nav links highlight
     const sections = document.querySelectorAll('section');
