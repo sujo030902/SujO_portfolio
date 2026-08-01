@@ -1010,6 +1010,96 @@
 
     .project-links a:hover { color: #fff; gap: 12px; }
 
+    /* Experience */
+    .experience-item {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .experience-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .experience-role {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .experience-title {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .experience-title i {
+      color: var(--accent);
+      font-size: 17px;
+    }
+
+    .experience-company {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+    }
+
+    .experience-company .dot { color: var(--accent); }
+
+    .experience-date {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--dim);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.02);
+      white-space: nowrap;
+    }
+
+    .experience-date i { color: var(--term); font-size: 11px; }
+
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .experience-list li {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .experience-list li::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 0.72em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
     /* Blogs list */
     .blog-item {
       display: flex;
@@ -1384,6 +1474,7 @@
         <a href="#home" class="active"><i class="fa-solid fa-terminal"></i>Home</a>
         <a href="#skills"><i class="fa-solid fa-shield-halved"></i>Skills</a>
         <a href="#projects"><i class="fa-solid fa-code-branch"></i>Projects</a>
+        <a href="#experience"><i class="fa-solid fa-briefcase"></i>Experience</a>
         <a href="#resume"><i class="fa-solid fa-file-lines"></i>Resume</a>
         <a href="#blogs"><i class="fa-solid fa-pen-nib"></i>Blogs</a>
         <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
@@ -1413,6 +1504,7 @@
         <a href="#home" class="active"><i class="fa-solid fa-terminal"></i>Home</a>
         <a href="#skills"><i class="fa-solid fa-shield-halved"></i>Skills</a>
         <a href="#projects"><i class="fa-solid fa-code-branch"></i>Projects</a>
+        <a href="#experience"><i class="fa-solid fa-briefcase"></i>Experience</a>
         <a href="#resume"><i class="fa-solid fa-file-lines"></i>Resume</a>
         <a href="#blogs"><i class="fa-solid fa-pen-nib"></i>Blogs</a>
         <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
@@ -1513,6 +1605,27 @@
             <div class="project-links">
               <a href="https://github.com/sujo030902/Phishing-Simulator" target="_blank" rel="noopener noreferrer">view source <i class="fa-solid fa-arrow-right"></i></a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience" class="reveal">
+        <h3><span class="eyebrow">//</span>Experience</h3>
+        <div class="card">
+          <div class="experience-item">
+            <div class="experience-head">
+              <div class="experience-role">
+                <span class="experience-title"><i class="fa-solid fa-user-shield"></i>Security Researcher</span>
+                <span class="experience-company">NKSkillEdge <span class="dot">•</span> Pvt. Ltd.</span>
+              </div>
+              <span class="experience-date"><i class="fa-solid fa-clock"></i> Jan 2026 — Apr 2026</span>
+            </div>
+            <ul class="experience-list">
+              <li>Performed security research and application testing tasks, contributing findings and technical documentation to internal projects.</li>
+              <li>Prepared project reports and process documentation (SOPs, PRDs) supporting security and development workflows.</li>
+              <li>Collaborated with a small technical team to review application design and flag security-relevant gaps early in development.</li>
+            </ul>
           </div>
         </div>
       </section>
