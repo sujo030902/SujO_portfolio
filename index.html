@@ -453,6 +453,71 @@
 
     .drawer-close:hover { color: var(--accent); transform: scale(1.1); }
 
+    /* Mobile bottom pill navbar — liquid glass */
+    .mobile-navbar {
+      display: none;
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 150;
+      align-items: center;
+      gap: 5px;
+      padding: 9px;
+      border-radius: 99px;
+      background: linear-gradient(160deg, rgba(20, 23, 34, 0.62), rgba(9, 11, 17, 0.55));
+      backdrop-filter: blur(22px) saturate(170%);
+      -webkit-backdrop-filter: blur(22px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+      max-width: calc(100vw - 24px);
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-navbar::-webkit-scrollbar { display: none; }
+
+    .mobile-navbar a {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 99px;
+      color: var(--muted);
+      font-size: 16px;
+      text-decoration: none;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .mobile-navbar a i {
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .mobile-navbar a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--accent), #ff9442);
+      box-shadow: 0 6px 20px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transform: scale(0.4);
+      opacity: 0;
+      transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+    }
+
+    .mobile-navbar a.active { color: #0a0a0a; }
+    .mobile-navbar a.active::before { transform: scale(1); opacity: 1; }
+    .mobile-navbar a:hover { color: var(--accent); }
+    .mobile-navbar a:active { transform: scale(0.9); }
+
+    .mobile-drawer.open + .mobile-navbar { display: none; }
+
     /* Scrollable Content Column */
     main.content-area {
       flex: 1;
@@ -1447,15 +1512,17 @@
 
       .hamburger { display: flex; }
 
+      .mobile-navbar { display: flex; }
+
       main.content-area {
         margin-left: 0;
         margin-top: 80px;
-        padding: 40px 28px;
+        padding: 40px 28px 120px;
       }
     }
 
     @media (max-width: 640px) {
-      main.content-area { padding: 24px 16px; }
+      main.content-area { padding: 24px 16px 110px; }
 
       .hero-title { font-size: 36px; }
 
@@ -1484,6 +1551,11 @@
       .terminal-screen { min-height: 260px; font-size: 12.5px; }
 
       .loader-console, .loader-bar { width: min(300px, 82vw); }
+    }
+
+    @media (max-width: 380px) {
+      .mobile-navbar { gap: 3px; padding: 7px; }
+      .mobile-navbar a { width: 36px; height: 36px; font-size: 14px; }
     }
 
     /* Reduced motion: honour user preference */
@@ -1567,6 +1639,17 @@
         <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
       </nav>
     </div>
+
+    <!-- Mobile bottom pill navbar (icons only, liquid glass) -->
+    <nav class="mobile-navbar" id="mobileNavbar" aria-label="Section navigation">
+      <a href="#home" class="active" title="Home"><i class="fa-solid fa-terminal"></i></a>
+      <a href="#skills" title="Skills"><i class="fa-solid fa-shield-halved"></i></a>
+      <a href="#projects" title="Projects"><i class="fa-solid fa-code-branch"></i></a>
+      <a href="#experience" title="Experience"><i class="fa-solid fa-briefcase"></i></a>
+      <a href="#resume" title="Resume"><i class="fa-solid fa-file-lines"></i></a>
+      <a href="#blogs" title="Blogs"><i class="fa-solid fa-pen-nib"></i></a>
+      <a href="#contact" title="Contact"><i class="fa-solid fa-envelope"></i></a>
+    </nav>
 
     <!-- Right Pane Content -->
     <main class="content-area">
@@ -2057,6 +2140,14 @@
     /* ---------- Scroll spy ---------- */
     const sections = document.querySelectorAll('section');
     const desktopLinks = document.querySelectorAll('#desktopNav a');
+    const bottomNavLinks = document.querySelectorAll('#mobileNavbar a');
+
+    function setActive(links, currentId) {
+      links.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === currentId) link.classList.add('active');
+      });
+    }
 
     window.addEventListener('scroll', () => {
       let currentSectionId = '';
@@ -2072,15 +2163,9 @@
         });
       }
 
-      desktopLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === currentSectionId) link.classList.add('active');
-      });
-
-      mobileLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === currentSectionId) link.classList.add('active');
-      });
+      setActive(desktopLinks, currentSectionId);
+      setActive(mobileLinks, currentSectionId);
+      setActive(bottomNavLinks, currentSectionId);
     });
 
     /* ---------- Smooth scroll with active state ---------- */
@@ -2093,14 +2178,9 @@
         if (!el) return;
         const currentId = href.substring(1);
 
-        desktopLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href').substring(1) === currentId) link.classList.add('active');
-        });
-        mobileLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href').substring(1) === currentId) link.classList.add('active');
-        });
+        setActive(desktopLinks, currentId);
+        setActive(mobileLinks, currentId);
+        setActive(bottomNavLinks, currentId);
 
         window.scrollTo({ top: el.offsetTop - 40, behavior: 'smooth' });
       });
