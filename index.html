@@ -311,6 +311,27 @@ main,main section{scroll-margin-top:24px}
 .hero-social-link:hover{animation:wobble .45s ease}
 .photo-wrap:hover .tape{animation:tapewiggle .5s ease}
 .footer-sign:hover{animation:wobble .5s ease}
+/* theme-switch doodle overlay */
+@keyframes swapdraw{to{stroke-dashoffset:0}}
+@keyframes swapfade{0%{opacity:0}18%{opacity:1}72%{opacity:1}100%{opacity:0}}
+@keyframes swappop{0%{transform:rotate(-10deg) scale(.5)}35%{transform:rotate(5deg) scale(1.08)}70%{transform:rotate(-4deg) scale(1)}100%{transform:rotate(-8deg) scale(1)}}
+@keyframes iconpop{0%{transform:scale(1) rotate(0)}40%{transform:scale(1.35) rotate(100deg)}100%{transform:scale(1) rotate(180deg)}}
+.theme-swap{
+  position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;opacity:0;
+}
+.theme-swap svg{width:130px;height:130px;transform:rotate(-8deg)}
+.theme-swap circle,.theme-swap ellipse,.theme-swap path{stroke-dasharray:1;stroke-dashoffset:1}
+.theme-swap .swap-moon{display:none}
+.theme-swap.to-dark{color:#ece3ce}
+.theme-swap.to-light{color:#2a251c}
+.theme-swap.to-dark .swap-sun{display:none}
+.theme-swap.to-dark .swap-moon{display:block}
+.theme-swap.play{animation:swapfade .7s ease forwards}
+.theme-swap.play svg{animation:swappop .7s ease}
+.theme-swap.play circle,.theme-swap.play ellipse,.theme-swap.play path{animation:swapdraw .5s ease forwards}
+.theme-swap.play ellipse{animation-delay:.08s}
+.theme-toggle.swap-play{animation:iconpop .5s ease}
 
 @media (max-width:640px){
   .main-nav{padding:24px 22px 6px}
@@ -587,6 +608,19 @@ main,main section{scroll-margin-top:24px}
   </div>
 </footer>
 
+<div class="theme-swap" id="theme-swap" aria-hidden="true">
+  <svg class="swap-sun" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+    <ellipse pathLength="1" cx="32" cy="32" rx="27" ry="25"/>
+    <circle pathLength="1" cx="32" cy="32" r="10"/>
+    <path pathLength="1" d="M32 9v6M32 49v6M9 32h6M49 32h6M16 16l4.5 4.5M43.5 43.5L48 48M48 16l-4.5 4.5M20.5 43.5L16 48"/>
+  </svg>
+  <svg class="swap-moon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <ellipse pathLength="1" cx="32" cy="32" rx="27" ry="25"/>
+    <path pathLength="1" d="M41 39 A19 19 0 1 1 41 13 A15.5 15.5 0 1 0 41 39 Z"/>
+    <path pathLength="1" d="M50 10l1.2 2.8 2.8 1.2-2.8 1.2L50 18l-1.2-2.8L46 14l2.8-1.2z"/>
+  </svg>
+</div>
+
 <script>
 (function(){
   var root=document.documentElement,
@@ -604,12 +638,28 @@ main,main section{scroll-margin-top:24px}
     btn.setAttribute('aria-label','Switch to '+(isDark?'light':'dark')+' mode');
     btn.addEventListener('click',function(){
       var dark=root.getAttribute('data-theme')!=='dark';
-      root.setAttribute('data-theme',dark?'dark':'light');
-      root.style.backgroundColor=dark?'#171410':'#fcfbf4';
-      try{localStorage.setItem('theme',dark?'dark':'light');}catch(e){}
-      btn.setAttribute('aria-pressed',dark?'true':'false');
-      btn.setAttribute('aria-label','Switch to '+(dark?'light':'dark')+' mode');
-      paintMeta();
+      var swap=document.getElementById('theme-swap');
+      var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function apply(){
+        root.setAttribute('data-theme',dark?'dark':'light');
+        root.style.backgroundColor=dark?'#171410':'#fcfbf4';
+        try{localStorage.setItem('theme',dark?'dark':'light');}catch(e){}
+        btn.setAttribute('aria-pressed',dark?'true':'false');
+        btn.setAttribute('aria-label','Switch to '+(dark?'light':'dark')+' mode');
+        paintMeta();
+      }
+      btn.classList.remove('swap-play');
+      void btn.offsetWidth;
+      btn.classList.add('swap-play');
+      if(swap&&!reduce){
+        swap.classList.remove('play','to-dark','to-light');
+        void swap.offsetWidth;
+        swap.classList.add('play',dark?'to-dark':'to-light');
+        setTimeout(apply,180);
+        setTimeout(function(){swap.classList.remove('play');},750);
+      }else{
+        apply();
+      }
     });
   }
   function closeMenu(){
