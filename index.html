@@ -1,701 +1,413 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Sujal Dhoke — Security Researcher and Penetration Tester">
-<meta name="theme-color" content="#fcfbf4" id="theme-color">
+<meta name="description" content="Sujal Dhoke — Security Researcher and Penetration Tester working on web applications, networks, and security tooling.">
+<meta name="theme-color" content="#1a1b26" id="theme-color">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sujal Dhoke — Security Researcher and Penetration Tester">
+<meta property="og:title" content="Sujal Dhoke — Security Researcher">
 <meta property="og:description" content="Security researcher and penetration tester working on web applications, networks, and security tooling.">
-<meta property="og:image" content="pfp.png">
-<title>Sujal Dhoke — field notes</title>
+<meta property="og:image" content="pfp_original.png">
+<noscript><style>#boot{display:none}</style></noscript>
+<title>Sujal Dhoke — Security Researcher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Mono&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);document.documentElement.style.backgroundColor=t==='dark'?'#171410':'#fcfbf4';})();</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem('sujo-theme');if(!t){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <style>
-:root,[data-theme="light"]{
-  --paper:#fcfbf4;
-  --paper2:#f3eee0;
-  --ink:#2a251c;
-  --muted:#6f6352;
-  --faint:#9a8c78;
-  --pen:#2b4acb;
-  --red:#d94848;
-  --hi:#ffe45e;
-  --border:#e2dac4;
-  --card:#fffef9;
-  --tape:rgba(255,228,94,.55);
-  --dots:rgba(42,37,28,.10);
-  color-scheme:light;
-}
-:root[data-theme="dark"]{
-  --paper:#171410;
-  --paper2:#201c15;
-  --ink:#ece3ce;
-  --muted:#a3967f;
-  --faint:#786d59;
-  --pen:#93a3ff;
-  --red:#ee7a6d;
-  --hi:rgba(255,228,94,.22);
-  --border:#2e2a20;
-  --card:#1e1a14;
-  --tape:rgba(255,228,94,.28);
-  --dots:rgba(236,227,206,.10);
+/* omarchy-inspired tokens — tokyo-night dark / paper light. single accent per theme. */
+:root,[data-theme="dark"]{
+  --bg-deep:#13141c;
+  --bg:#1a1b26;
+  --surface:#1f2230;
+  --surface-2:#24283b;
+  --border-subtle:#24283b;
+  --border-strong:#414868;
+  --text:#c0caf5;
+  --text-secondary:#a9b1d6;
+  --text-muted:#8b93b8;
+  --brand:#9ece6a;
+  --brand-ink:#0c0e10;
+  --selection:#292e42;
   color-scheme:dark;
 }
-html{scroll-behavior:smooth}
-html,body{background-color:var(--paper)}
-body{
-  margin:0;padding:0;
-  color:var(--ink);
-  font-family:"DM Sans","Helvetica Neue",sans-serif;
-  font-size:15px;line-height:1.7;
-  overflow-x:hidden;
-  background-image:radial-gradient(var(--dots) 1px,transparent 1px);
-  background-size:22px 22px;
-  transition:background-color .25s,color .25s;
+[data-theme="light"]{
+  --bg-deep:#e8e6dc;
+  --bg:#fffcf0;
+  --surface:#ffffff;
+  --surface-2:#f2efe4;
+  --border-subtle:#e5e2d8;
+  --border-strong:#b7b5ac;
+  --text:#100f0f;
+  --text-secondary:#33302b;
+  --text-muted:#6b6860;
+  --brand:#1e66f5;
+  --brand-ink:#ffffff;
+  --selection:#d7e0fc;
+  color-scheme:light;
 }
-*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
-::selection{background:var(--hi);color:var(--ink)}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-:focus-visible{outline:2px dashed var(--red);outline-offset:3px;border-radius:2px}
-main,main section{scroll-margin-top:24px}
-.hand{font-family:"Caveat",cursive}
-.mono{font-family:"DM Mono",monospace}
-
-/* ---------- nav ---------- */
-.main-nav{
-  display:flex;justify-content:space-between;align-items:center;
-  max-width:820px;margin:0 auto;padding:34px 36px 10px;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:14.5px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--selection);color:var(--text)}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.35s;animation-timing-function:ease}
+/* seamless theme crossfade — colors glide instead of snapping */
+body,.topbar,.term,.contact-box,.btn,.tags li,.theme-foot,.socials a,.foot-base kbd{
+  transition-property:background-color,border-color,color,box-shadow;
+  transition-duration:.35s;transition-timing-function:ease;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+/* boot splash — plymouth-style: logo + eased progress bar in theme colors */
+#boot{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:var(--bg);transition:opacity .35s ease}
+#boot.done{opacity:0;pointer-events:none}
+.boot-box{text-align:center;width:min(340px,72vw)}
+.boot-logo{font-weight:800;font-size:15px;letter-spacing:-0.01em;margin-bottom:18px}
+.boot-logo .prompt{color:var(--brand)}
+.boot-bar{border:1px solid var(--border-strong);background:var(--surface);height:12px;padding:2px}
+.boot-bar i{display:block;height:100%;width:0;background:var(--brand)}
+.boot-msg{margin-top:14px;font-size:12px;color:var(--text-muted);min-height:18px}
+.boot-msg .ok{color:var(--brand);font-weight:700}
+body.booting{overflow:hidden}
+.skip{position:absolute;left:-9999px;top:0;background:var(--brand);color:var(--brand-ink);padding:8px 14px;font-weight:700;font-size:13px;z-index:100}
+.skip:focus{left:8px;top:8px}
+/* nav — single line, 64px, like omarchy top bar */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  height:64px;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border-subtle);
+}
+.topbar-inner{
+  max-width:896px;height:64px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;gap:16px;
   position:relative;
 }
-.logo{font-family:"Caveat",cursive;font-size:30px;font-weight:700;line-height:1;position:relative;padding-right:6px}
-.logo .squiggle{position:absolute;left:-2px;right:-4px;bottom:-9px;width:calc(100% + 6px);height:12px;color:var(--red)}
-.logo .squiggle path{
-  stroke-dasharray:300;stroke-dashoffset:300;
-  animation:draw 1.1s .3s ease forwards;
+.brand{font-weight:800;font-size:14px;letter-spacing:-0.01em;text-decoration:none;white-space:nowrap}
+.brand .prompt{color:var(--brand)}
+.brand:hover .name{text-decoration:underline;text-decoration-color:var(--brand);text-underline-offset:3px}
+.socials{display:flex;align-items:center;gap:2px;margin-left:auto}
+.socials a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;color:var(--text-muted);border:1px solid transparent}
+.socials a:hover{color:var(--brand);border-color:var(--border-strong);background:var(--surface)}
+.socials svg{display:block}
+.theme-foot{
+  background:none;border:1px solid var(--border-strong);color:var(--text-muted);
+  font:inherit;font-size:12px;padding:4px 10px;cursor:pointer;
 }
-@keyframes draw{to{stroke-dashoffset:0}}
-.nav-right{display:flex;align-items:center;gap:20px}
-.nav-links{display:flex;align-items:center;gap:22px;list-style:none;margin:0;padding:0}
-.nav-links a{
-  font-family:"Caveat",cursive;font-size:21px;font-weight:600;letter-spacing:.02em;
-  color:var(--muted);padding:2px 1px;position:relative;
+.theme-foot:hover{color:var(--brand);border-color:var(--brand)}
+.theme-foot kbd{border:1px solid var(--border-strong);padding:1px 6px;font-family:inherit;font-size:11px;background:var(--surface)}
+/* layout */
+.wrap{max-width:896px;margin:0 auto;padding:0 24px}
+section[id]{scroll-margin-top:84px}
+/* hero — left-aligned split, fits viewport */
+.hero{
+  display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:start;
+  padding:56px 0 40px;
+  border-bottom:1px solid var(--border-subtle);
+  min-height:min(72vh,640px);align-content:center;
 }
-.nav-links a:hover{color:var(--pen)}
-.theme-toggle{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:30px;height:30px;color:var(--muted);
-  background:none;border:1.5px dashed var(--border);border-radius:50%;
-  cursor:pointer;padding:0;transition:color .15s,transform .3s;
+h1{
+  font-size:clamp(30px,5vw,44px);line-height:1.08;letter-spacing:-0.03em;
+  margin:0 0 14px;font-weight:800;
 }
-.theme-toggle:hover{color:var(--pen);transform:rotate(20deg)}
-.theme-toggle svg{display:block}
-[data-theme="light"] .icon-moon,[data-theme="dark"] .icon-sun{display:none}
-.nav-toggle{
-  display:none;position:relative;width:26px;height:18px;
-  background:none;border:none;cursor:pointer;padding:0;
+h1 .accent{color:var(--brand)}
+.caret{display:inline-block;width:.55em;height:1em;background:var(--brand);vertical-align:-0.12em;margin-left:6px;animation:blink 1.06s step-end infinite}
+@keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+.lede{color:var(--text-secondary);font-size:14.5px;max-width:56ch;margin:0 0 10px}
+.lede strong{color:var(--text)}
+.status{color:var(--text-muted);font-size:13px;margin:12px 0 0}
+.status .ok{color:var(--brand)}
+.hero-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.btn{
+  display:inline-block;font-size:13px;font-weight:700;text-decoration:none;
+  padding:10px 18px;border:1px solid var(--brand);
 }
-.nav-toggle .bar{
-  position:absolute;left:0;width:26px;height:2px;background:var(--ink);border-radius:2px;
-  transition:transform .25s ease,opacity .2s ease;
-}
-.nav-toggle .bar:nth-child(1){top:0;transform:rotate(-1deg)}
-.nav-toggle .bar:nth-child(2){top:8px}
-.nav-toggle .bar:nth-child(3){top:16px;transform:rotate(1deg)}
-.nav-open .nav-toggle .bar:nth-child(1){transform:translateY(8px) rotate(45deg)}
-.nav-open .nav-toggle .bar:nth-child(2){opacity:0}
-.nav-open .nav-toggle .bar:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-
-/* ---------- page frame ---------- */
-.page{max-width:820px;margin:0 auto;padding:0 36px 36px}
-
-/* ---------- hero / cover page ---------- */
-.cover{position:relative;margin:26px 0 64px;padding:34px 0 10px}
-.datestamp{
-  display:inline-block;font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.08em;
-  color:var(--muted);border:1.5px solid var(--border);border-radius:3px;
-  padding:4px 10px;transform:rotate(-1.5deg);background:var(--card);
-  transition:transform .2s ease;
-}
-.datestamp:hover{transform:rotate(1deg) scale(1.05)}
-.hero-grid{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:start;margin-top:26px}
-.hero-headline{
-  font-family:"Caveat",cursive;font-weight:700;
-  font-size:52px;line-height:1.04;letter-spacing:0;
-  margin:0 0 14px;max-width:520px;
-}
-.hero-headline .circled{position:relative;white-space:nowrap;color:var(--pen)}
-.hero-headline .circled svg{position:absolute;left:-8%;top:-14%;width:116%;height:128%;color:var(--red);pointer-events:none}
-.hero-bio{color:var(--muted);font-size:15px;line-height:1.75;margin:0 0 14px;max-width:470px}
-.hero-bio a{color:var(--pen);text-decoration:underline;text-decoration-style:wavy;text-underline-offset:3px;text-decoration-thickness:1px}
-.hero-bio a:hover{color:var(--red)}
-.hero-socials{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px}
-.hero-social-link{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:"Caveat",cursive;font-size:20px;font-weight:600;letter-spacing:.02em;
-  color:var(--muted);
-  border:1.5px solid var(--border);border-radius:20px;padding:3px 16px 5px;
-  background:var(--card);transition:transform .15s,color .15s,border-color .15s;
-}
-.hero-social-link:hover{color:var(--pen);border-color:var(--pen);transform:rotate(-1.5deg)}
-
-/* taped photo */
-.photo-wrap{position:relative;flex-shrink:0;margin-top:6px;transform:rotate(2.5deg)}
-.photo-wrap .tape{
-  position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-3deg);
-  width:92px;height:26px;background:var(--tape);
-  border-left:1px dashed rgba(0,0,0,.12);border-right:1px dashed rgba(0,0,0,.12);
-  z-index:3;
-}
-.photo-card{
-  background:var(--card);padding:10px 10px 12px;
-  border:1.5px solid var(--border);
-  box-shadow:4px 5px 0 var(--paper2);
-  position:relative;z-index:2;transition:transform .25s ease;
-}
-.photo-card:hover{transform:rotate(-1deg) scale(1.015)}
-.photo{width:196px;height:236px;object-fit:cover;object-position:center 12%}
-.photo-caption{
-  font-family:"Caveat",cursive;font-size:21px;font-weight:600;
-  color:var(--muted);text-align:center;padding-top:6px;
-}
-/* margin doodles */
-.doodle{position:absolute;color:var(--faint);opacity:.75;pointer-events:none}
-.star{animation:twinkle 3.2s ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:.45}50%{opacity:.9}}
-
-/* ---------- diary entries ---------- */
-.entry{position:relative;margin-bottom:60px;padding-left:34px}
-.entry:before{
-  content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;
-  background-image:linear-gradient(var(--red) 55%,transparent 45%);
-  background-size:2px 9px;opacity:.55;border-radius:2px;
-}
-.entry-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
-.entry-no{
-  font-family:"DM Mono",monospace;font-size:11px;color:var(--paper);
-  background:var(--red);border-radius:50%;width:26px;height:26px;flex-shrink:0;
-  display:inline-flex;align-items:center;justify-content:center;
-  transform:rotate(-6deg);transition:transform .5s cubic-bezier(.34,1.56,.64,1);
-}
-.entry:hover .entry-no{transform:rotate(354deg)}
-.entry-title{font-family:"Caveat",cursive;font-size:36px;font-weight:700;margin:0;line-height:1.1}
-.entry-date{
-  font-family:"Caveat",cursive;font-size:21px;font-weight:600;color:var(--faint);
-  transform:rotate(-1deg);
-}
-.entry-side-link{
-  margin-left:auto;font-family:"Caveat",cursive;font-size:21px;font-weight:600;
-  color:var(--muted);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:4px;
-}
-.entry-side-link:hover{color:var(--pen)}
-
-/* field log rows */
-.log{list-style:none;padding:0;margin:6px 0 0}
-.log-row{display:grid;grid-template-columns:86px 1fr;gap:0 18px;padding:12px 0;border-bottom:1.5px dashed var(--border)}
-.log-row:last-child{border-bottom:none}
-.log-date{font-family:"DM Mono",monospace;font-size:11px;color:var(--pen);padding-top:4px;white-space:nowrap}
-.log-row.now .log-date{color:var(--red)}
-.log-row p{margin:0;color:var(--muted);font-size:14.5px;max-width:580px}
-.log-row p strong{color:var(--ink);font-weight:600}
-
-/* case-file cards */
-.files{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:14px}
-.file{
-  display:block;background:var(--card);border:1.5px solid var(--border);border-radius:4px;
-  padding:18px 20px 16px;position:relative;
-  box-shadow:3px 4px 0 var(--paper2);
-  transition:transform .15s ease,box-shadow .15s ease;
-}
-.file:nth-child(odd){transform:rotate(-.4deg)}
-.file:nth-child(even){transform:rotate(.4deg)}
-.file:hover{transform:rotate(0) translateY(-2px);box-shadow:4px 7px 0 var(--paper2)}
-.file-pin{
-  position:absolute;top:-9px;left:26px;width:16px;height:16px;border-radius:50%;
-  background:var(--red);box-shadow:inset -2px -3px 0 rgba(0,0,0,.25);
-}
-.file-top{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
-.checkbox{
-  flex-shrink:0;width:17px;height:17px;border:2px solid var(--pen);border-radius:4px;
-  display:inline-flex;align-items:center;justify-content:center;
-  color:var(--pen);font-size:13px;font-weight:700;transform:rotate(-4deg) translateY(2px);
-}
-.file-title{font-family:"Caveat",cursive;font-size:27px;font-weight:700;line-height:1.15;color:var(--ink)}
-.file:hover .file-title{color:var(--pen)}
-.file-date{margin-left:auto;font-family:"DM Mono",monospace;font-size:11px;color:var(--faint);white-space:nowrap}
-.file-excerpt{color:var(--muted);font-size:14px;line-height:1.65;margin:2px 0 0 29px;max-width:560px}
-.file-tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0 29px}
-.stamp{
-  font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--pen);border:1.5px solid var(--pen);border-radius:3px;
-  padding:2px 9px;transform:rotate(-1deg);opacity:.85;background:transparent;
-}
-.file:nth-child(even) .stamp{color:var(--red);border-color:var(--red);transform:rotate(1deg)}
-
+.btn-primary{background:var(--brand);color:var(--brand-ink)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost{color:var(--text);border-color:var(--border-strong);background:var(--surface)}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
+.hero-meta{display:flex;gap:16px;margin-top:18px;font-size:12.5px;color:var(--text-muted);flex-wrap:wrap}
+.hero-meta a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid var(--border-strong)}
+.hero-meta a:hover{color:var(--brand);border-color:var(--brand)}
+/* photo — thick primary-color frame, glides with the theme */
+.term{background:var(--surface);border:4px solid var(--brand)}
+.term img{width:100%;height:auto;display:block;aspect-ratio:3/3.6;object-fit:cover;object-position:center 15%;filter:saturate(.96)}
+/* section headers — single message, no eyebrow stacking */
+.sec{padding:36px 0;border-bottom:1px solid var(--border-subtle)}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+h2{font-size:22px;letter-spacing:-0.02em;margin:0;font-weight:800}
+.sec-sub{color:var(--text-muted);font-size:13px;margin:0 0 14px;max-width:65ch}
+.sec-side{margin-left:auto;font-size:13px;color:var(--text-muted);text-decoration:none;border-bottom:1px solid var(--border-strong);white-space:nowrap}
+.sec-side:hover{color:var(--brand);border-color:var(--brand)}
+/* rows — divide-y, no 3-card grid */
+.rows{list-style:none;margin:0;padding:0;border-top:1px solid var(--border-subtle)}
+.rows > li{border-bottom:1px solid var(--border-subtle);padding:14px 0}
+.row-grid{display:grid;grid-template-columns:92px 1fr auto;gap:14px;align-items:baseline}
+.row-date{font-size:12px;color:var(--brand);white-space:nowrap}
+.row-title{font-size:14.5px;font-weight:700}
+.row-title a{text-decoration:none}
+.row-title a:hover{color:var(--brand);text-decoration:underline;text-underline-offset:3px}
+.row-arrow{color:var(--text-muted);font-size:14px}
+a.rowlink{display:block;text-decoration:none}
+a.rowlink:hover .row-arrow{color:var(--brand);transform:translate(2px,-2px)}
+.row-arrow{display:inline-block;transition:transform .15s ease}
+.row-desc{margin:6px 0 0 106px;color:var(--text-secondary);font-size:13.5px;max-width:62ch}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0 106px;padding:0;list-style:none}
+.tags li{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);border:1px solid var(--border-strong);padding:2px 8px;background:var(--surface)}
 /* experience */
-.job{padding:12px 0;border-bottom:1.5px dashed var(--border)}
-.job:last-of-type{border-bottom:none}
-.job-top{display:grid;grid-template-columns:110px 1fr auto;gap:0 16px;align-items:baseline}
-.job-date{font-family:"DM Mono",monospace;font-size:11px;color:var(--pen)}
-.job-title{font-family:"Caveat",cursive;font-size:25px;font-weight:700;line-height:1.2}
-.job-tag{
-  font-family:"DM Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;
-  color:var(--red);border:1.5px dashed var(--red);border-radius:12px;padding:2px 10px;white-space:nowrap;
-}
-.job-desc{margin:4px 0 0 126px;color:var(--muted);font-size:14px;max-width:560px}
-
-/* contact */
-.contact-note{font-family:"Caveat",cursive;font-size:28px;font-weight:600;line-height:1.35;margin:6px 0 0;max-width:560px}
-.contact-note a{
-  color:var(--ink);text-decoration:none;white-space:nowrap;
-}
-.contact-note a:hover{color:var(--pen)}
-
-/* body copy follows the handwritten heading style */
-.hero-bio,.log-row p,.file-excerpt,.job-desc{
-  font-family:"Caveat",cursive;font-weight:500;
-  font-size:21px;line-height:1.42;
-}
-.log-row p strong{font-weight:700}
-.hl{background:linear-gradient(transparent 55%,var(--hi) 55%,var(--hi) 92%,transparent 92%);padding:0 2px}
-
-/* ---------- footer ---------- */
-.site-footer{
-  display:flex;align-items:center;justify-content:space-between;gap:14px;
-  max-width:820px;margin:40px auto 0;padding:26px 36px 44px;
-  border-top:2px dashed var(--border);
-}
-.footer-sign{font-family:"Caveat",cursive;font-size:22px;font-weight:600;color:var(--faint)}
-.footer-sign:hover{color:var(--pen)}
-.footer-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.footer-nav{display:flex;align-items:center}
-.footer-nav a{
-  font-family:"Caveat",cursive;font-size:20px;font-weight:600;color:var(--faint);
-  padding:0 10px;border-right:1px solid var(--border);
-}
-.footer-nav a:first-child{padding-left:0}
-.footer-nav a:last-child{border-right:none;padding-right:0}
-.footer-nav a:hover{color:var(--pen)}
-.footer-logos{display:flex;align-items:center;color:var(--faint)}
-.footer-logos a{display:inline-flex;margin-left:1rem;transition:transform .15s,color .15s}
-.footer-logos a:first-child{margin-left:0}
-.footer-logos a:hover{color:var(--pen);transform:translateY(-2px) rotate(-6deg)}
-
-/* ---------- doodle motion ---------- */
-@keyframes wobble{0%{transform:rotate(0)}25%{transform:rotate(-5deg) translateY(-1px)}55%{transform:rotate(3deg)}80%{transform:rotate(-2deg)}100%{transform:rotate(-1.5deg)}}
-@keyframes pop{0%{transform:rotate(-4deg) translateY(2px) scale(1)}40%{transform:rotate(5deg) translateY(2px) scale(1.4)}100%{transform:rotate(-4deg) translateY(2px) scale(1.15)}}
-@keyframes pinbounce{0%{transform:translateY(0)}35%{transform:translateY(-5px)}70%{transform:translateY(1px)}100%{transform:translateY(0)}}
-@keyframes floaty{0%,100%{transform:translateY(0) rotate(12deg)}50%{transform:translateY(-5px) rotate(12deg)}}
-@keyframes tapewiggle{0%{transform:translateX(-50%) rotate(-3deg)}30%{transform:translateX(-50%) rotate(3deg)}65%{transform:translateX(-50%) rotate(-6deg)}100%{transform:translateX(-50%) rotate(-3deg)}}
-.head-doodle{
-  width:26px;height:26px;color:var(--red);flex-shrink:0;
-  transform:rotate(-8deg);align-self:center;
-}
-.head-doodle path{stroke-dasharray:1;stroke-dashoffset:1}
-.entry.inview .head-doodle path{transition:stroke-dashoffset .7s ease;stroke-dashoffset:0}
-.entry.inview .head-doodle path:nth-child(2){transition-delay:.18s}
-.nav-links a::after,.file-title::after{
-  content:"";position:absolute;left:-3px;right:-3px;bottom:-5px;height:7px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 7' preserveAspectRatio='none'%3E%3Cpath d='M2 4.5 C 12 1.5, 22 6, 32 3.5 S 52 2, 58 4' fill='none' stroke='%23d94848' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
-  opacity:0;transform:translateY(3px);transition:opacity .2s ease,transform .2s ease;
-  pointer-events:none;
-}
-.nav-links a:hover::after,.file:hover .file-title::after{opacity:1;transform:translateY(0)}
-.file-title{position:relative}
-.file:hover .checkbox{animation:pop .38s ease}
-.file:hover .file-pin{animation:pinbounce .5s ease}
-.hero-social-link:hover{animation:wobble .45s ease}
-.photo-wrap:hover .tape{animation:tapewiggle .5s ease}
-.footer-sign:hover{animation:wobble .5s ease}
-/* theme-switch doodle overlay */
-@keyframes swapdraw{to{stroke-dashoffset:0}}
-@keyframes swapfade{0%{opacity:0}18%{opacity:1}72%{opacity:1}100%{opacity:0}}
-@keyframes swappop{0%{transform:rotate(-10deg) scale(.5)}35%{transform:rotate(5deg) scale(1.08)}70%{transform:rotate(-4deg) scale(1)}100%{transform:rotate(-8deg) scale(1)}}
-@keyframes iconpop{0%{transform:scale(1) rotate(0)}40%{transform:scale(1.35) rotate(100deg)}100%{transform:scale(1) rotate(180deg)}}
-.theme-swap{
-  position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
-  pointer-events:none;opacity:0;
-}
-.theme-swap svg{width:130px;height:130px;transform:rotate(-8deg)}
-.theme-swap circle,.theme-swap ellipse,.theme-swap path{stroke-dasharray:1;stroke-dashoffset:1}
-.theme-swap .swap-moon{display:none}
-.theme-swap.to-dark{color:#ece3ce}
-.theme-swap.to-light{color:#2a251c}
-.theme-swap.to-dark .swap-sun{display:none}
-.theme-swap.to-dark .swap-moon{display:block}
-.theme-swap.play{animation:swapfade .7s ease forwards}
-.theme-swap.play svg{animation:swappop .7s ease}
-.theme-swap.play circle,.theme-swap.play ellipse,.theme-swap.play path{animation:swapdraw .5s ease forwards}
-.theme-swap.play ellipse{animation-delay:.08s}
-.theme-toggle.swap-play{animation:iconpop .5s ease}
-
-@media (max-width:640px){
-  .main-nav{padding:24px 22px 6px}
-  .page{padding:0 22px 24px}
-  .nav-right{gap:14px}
-  .nav-toggle{display:block}
-  .nav-links{
-    position:absolute;top:100%;left:16px;right:16px;z-index:50;
-    flex-direction:column;align-items:stretch;gap:0;
-    background:var(--card);border:1.5px solid var(--border);border-radius:6px;
-    box-shadow:4px 5px 0 var(--paper2);
-    margin:8px 0 0;padding:4px 16px;
-    opacity:0;visibility:hidden;transform:translateY(-6px) rotate(-.5deg);
-    transition:opacity .2s ease,transform .2s ease,visibility .2s;
-  }
-  .nav-open .nav-links{opacity:1;visibility:visible;transform:translateY(0) rotate(-.5deg)}
-  .nav-links a{display:block;padding:8px 0;font-size:23px;border-bottom:1.5px dashed var(--border)}
-  .nav-links li:last-child a{border-bottom:none}
-  .hero-grid{display:flex;flex-direction:column;gap:20px}
-  .hero-headline{font-size:42px}
-  .photo-wrap{display:none}
-  .entry{padding-left:26px}
-  .job-top{grid-template-columns:1fr}
-  .job-tag{justify-self:start}
+.job{padding:14px 0;border-bottom:1px solid var(--border-subtle)}
+.job:last-child{border-bottom:none}
+.job-top{display:grid;grid-template-columns:110px 1fr auto;gap:14px;align-items:baseline}
+.job-date{font-size:12px;color:var(--brand)}
+.job-role{font-weight:700;font-size:14.5px}
+.job-tag{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);border:1px solid var(--brand);padding:2px 10px;white-space:nowrap}
+.job-desc{margin:6px 0 0 124px;color:var(--text-secondary);font-size:13.5px;max-width:62ch}
+/* contact — one message */
+.contact-box{background:var(--surface);border:1px solid var(--border-strong);padding:24px;margin-top:14px}
+.contact-box p{margin:0 0 8px;color:var(--text-secondary);font-size:14px}
+.contact-mail{font-size:clamp(18px,3.4vw,24px);font-weight:800;letter-spacing:-0.02em;color:var(--text);text-decoration:none;border-bottom:2px solid var(--brand)}
+.contact-mail:hover{color:var(--brand)}
+.contact-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+/* footer — omarchy columns */
+footer{padding:32px 0 48px}
+.foot-base{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border-subtle);padding-top:16px;font-size:12px;color:var(--text-muted);flex-wrap:wrap}
+.foot-base kbd{border:1px solid var(--border-strong);padding:1px 6px;font-family:inherit;font-size:11px;background:var(--surface)}
+/* reveal */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media (max-width:720px){
+  .topbar-inner{gap:10px;padding:0 16px}
+  .brand{font-size:13px;flex-shrink:0}
+  .socials{gap:0}
+  .socials a{width:34px}
+  .hero{grid-template-columns:1fr;padding:36px 0 32px;min-height:0}
+  .term{display:none}
+  .row-grid{grid-template-columns:72px 1fr auto}
+  .row-desc,.tags{margin-left:86px}
+  .job-top{grid-template-columns:1fr;gap:4px}
   .job-desc{margin-left:0}
-  .log-row{grid-template-columns:72px 1fr;gap:0 12px}
-  .site-footer{flex-direction:column-reverse;align-items:flex-start;padding:22px 22px 30px}
+  .job-tag{justify-self:start}
 }
 @media (prefers-reduced-motion:reduce){
   *,*:before,*:after{animation:none!important;transition:none!important}
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
   html{scroll-behavior:auto}
-  .logo .squiggle path{stroke-dashoffset:0}
-  .head-doodle path{stroke-dashoffset:0}
+  .reveal{opacity:1;transform:none}
+  .caret{display:none}
 }
 </style>
 </head>
 <body>
-<header>
-  <nav class="main-nav" aria-label="Primary navigation">
-    <a class="logo" href="#about">Sujal Dhoke
-      <svg class="squiggle" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 C 40 2, 70 10, 105 6 S 170 4, 197 7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
-    </a>
-    <div class="nav-right">
-      <ul class="nav-links" id="nav-panel">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#writing">Writing</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="Sujal_Dhoke_VAPT_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
-      </ul>
-      <button class="theme-toggle" id="theme" type="button" aria-pressed="false" aria-label="Switch to dark mode">
-        <svg class="icon-sun" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.1M12 19.3v2.1M2.6 12h2.1M19.3 12h2.1M5.4 5.4l1.5 1.5M17.1 17.1l1.5 1.5M18.6 5.4l-1.5 1.5M6.9 17.1l-1.5 1.5"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M20.8 14.4a8.4 8.4 0 0 1-11.2-11.2A9 9 0 1 0 20.8 14.4z"/></svg>
-      </button>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </button>
-    </div>
-  </nav>
+<a class="skip" href="#main">Skip to content</a>
+<div id="boot" aria-hidden="true">
+  <div class="boot-box">
+    <div class="boot-logo"><span class="prompt">sujal@sec</span>:~$</div>
+    <div class="boot-bar"><i id="bootFill"></i></div>
+    <div class="boot-msg" id="bootMsg"><span class="ok">[ OK ]</span> mounting /dev/portfolio</div>
+  </div>
+</div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top" aria-label="Sujal Dhoke home"><span class="prompt">sujal@sec</span><span class="name">:~$</span></a>
+    <nav class="socials" aria-label="Social links">
+      <a href="https://github.com/sujo030902" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg width="17" height="17" viewBox="0 0 496 512" fill="currentColor" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/sujal-dhoke-3718b5346/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg width="17" height="17" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+      <a href="https://x.com/SujalDhoke03" target="_blank" rel="noopener noreferrer" aria-label="X">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+      </a>
+      <a href="https://medium.com/@dhksujal03" target="_blank" rel="noopener" aria-label="Medium">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42zM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+      </a>
+    </nav>
+  </div>
 </header>
 
-<div class="page">
-  <section class="cover" id="about">
-    <svg class="doodle star" style="top:6px;right:64px;width:26px;height:26px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 5.4 5.8.5-4.4 3.8 1.3 5.7-4.9-3-4.9 3 1.3-5.7L4 8.9l5.8-.5z"/></svg>
-    <svg class="doodle" style="top:64px;right:8px;width:30px;height:30px;transform:rotate(12deg);animation:floaty 3.5s ease-in-out infinite" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 18c4-1 5-8 9-9 2.4-.6 5 .4 6.5 2.5M15.5 14.5L20 11l-4.6-1.6"/></svg>
-    <span class="datestamp">field notes &mdash; sept 2026</span>
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <h1 class="hero-headline">Hey, I&rsquo;m Sujal. I test
-          <span class="circled">security
-            <svg viewBox="0 0 220 70" fill="none" preserveAspectRatio="none" aria-hidden="true"><path d="M12 38 C 30 12, 120 6, 180 12 S 214 34, 206 50 S 120 68, 60 62 S 6 54, 12 38" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
-          </span>
-          &amp; write things down.</h1>
-        <p class="hero-bio">I&rsquo;m a security researcher and penetration tester based in India, working on web applications, networks, and security tooling. My interest is in making technical findings understandable and useful.</p>
-        <p class="hero-bio">Currently <span class="hl">open to internships and entry-level opportunities</span> in application security, vulnerability assessment, and penetration testing.</p>
-        <nav class="hero-socials" aria-label="Social links">
-          <a class="hero-social-link" href="https://github.com/sujo030902" target="_blank" rel="noopener noreferrer">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-            <span>github</span>
-          </a>
-          <a class="hero-social-link" href="https://www.linkedin.com/in/sujal-dhoke-3718b5346/" target="_blank" rel="noopener noreferrer">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="15" width="15" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-            <span>linkedin</span>
-          </a>
-          <a class="hero-social-link" href="https://x.com/SujalDhoke03" target="_blank" rel="noopener noreferrer">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="13" width="13" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-            <span>x</span>
-          </a>
-        </nav>
+<div class="wrap" id="top">
+  <section class="hero" aria-labelledby="intro-title">
+    <div>
+      <h1 id="intro-title">Sujal Dhoke.<br> I test <span class="accent">security</span> &amp; write it down.<span class="caret" aria-hidden="true"></span></h1>
+      <p class="lede">Security researcher &amp; penetration tester in India. I work on <strong>web apps, networks, and security tooling</strong> — and turn findings into notes people can use.</p>
+      <p class="status"><span class="ok">&#9679; open</span> to internships &amp; entry-level roles in AppSec / VAPT.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">view projects</a>
+        <a class="btn btn-ghost" href="Sujal_Dhoke_VAPT_Resume.pdf" target="_blank" rel="noopener">download resume</a>
       </div>
-      <div class="photo-wrap">
-        <div class="tape"></div>
-        <div class="photo-card">
-          <img class="photo" src="pfp.png" alt="Sujal Dhoke">
-          <div class="photo-caption">me, most days</div>
-        </div>
+      <div class="hero-meta">
+        <a href="https://github.com/sujo030902" target="_blank" rel="noopener noreferrer">github/sujo030902</a>
+        <a href="https://www.linkedin.com/in/sujal-dhoke-3718b5346/" target="_blank" rel="noopener noreferrer">linkedin</a>
+        <a href="https://x.com/SujalDhoke03" target="_blank" rel="noopener noreferrer">x/@SujalDhoke03</a>
       </div>
     </div>
+    <figure class="term" style="margin:0" aria-label="Portrait of Sujal Dhoke">
+      <img src="pfp_original.png" alt="Portrait of Sujal Dhoke against a brick wall" width="1086" height="1448" fetchpriority="high">
+    </figure>
   </section>
 
-  <main>
-  <section id="news" class="entry">
-    <div class="entry-head">
-      <span class="entry-no">1</span>
-      <h2 class="entry-title">News</h2>
-      <span class="entry-date">2026</span>
-      <svg class="head-doodle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path pathLength="1" d="M12 4v16M4 12h16"/><path pathLength="1" d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>
-    </div>
-    <ul class="log">
-      <li class="log-row">
-        <time class="log-date">apr 2026</time>
-        <p>Completed a security research role at <strong>NKSkillEdge</strong>, contributing application-testing findings and technical documentation.</p>
-      </li>
-      <li class="log-row">
-        <time class="log-date">2026</time>
-        <p>Published writeups on <strong>DVWA</strong>, <strong>Windows logging</strong>, and the lessons behind early bug-bounty reports.</p>
-      </li>
-      <li class="log-row now">
-        <time class="log-date">now &#9679;</time>
-        <p>Building small security tools and looking for the next practical problem to work on.</p>
-      </li>
-    </ul>
-  </section>
-
-  <section id="projects" class="entry">
-    <div class="entry-head">
-      <span class="entry-no">2</span>
-      <h2 class="entry-title">Selected projects</h2>
-      <span class="entry-date">ongoing</span>
-      <svg class="head-doodle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M5 19L15 9"/><path pathLength="1" d="M9 9h6v6"/></svg>
-      <a class="entry-side-link" href="https://github.com/sujo030902" target="_blank" rel="noopener">all on github &rarr;</a>
-    </div>
-    <ul class="files">
+  <main id="main">
+  <section class="sec reveal" id="projects" aria-labelledby="proj-h">
+    <div class="sec-head"><h2 id="proj-h">projects</h2><a class="sec-side" href="https://github.com/sujo030902" target="_blank" rel="noopener">all on github -&gt;</a></div>
+    <p class="sec-sub">Tools, not demos. Each one scans, reports, or teaches something.</p>
+    <ul class="rows">
       <li>
-        <a class="file" href="https://github.com/sujo030902/owasp-top10-scanner" target="_blank" rel="noopener">
-          <span class="file-pin" aria-hidden="true"></span>
-          <div class="file-top">
-            <span class="checkbox" aria-hidden="true">&#10003;</span>
-            <span class="file-title">OWASP Top 10 Scanner</span>
-          </div>
-          <p class="file-excerpt">An automated scanner that crawls a target, checks OWASP categories, and produces HTML and JSON reports.</p>
-          <div class="file-tags"><span class="stamp">Python</span><span class="stamp">OWASP</span><span class="stamp">Security</span></div>
+        <a class="rowlink" href="https://github.com/sujo030902/owasp-top10-scanner" target="_blank" rel="noopener">
+          <div class="row-grid"><span class="row-date">p01</span><span class="row-title">OWASP Top 10 Scanner</span><span class="row-arrow" aria-hidden="true">&#8599;</span></div>
+          <p class="row-desc">Crawls a target, checks OWASP categories, exports HTML + JSON reports.</p>
+          <ul class="tags"><li>python</li><li>owasp</li><li>scanner</li></ul>
         </a>
       </li>
       <li>
-        <a class="file" href="https://github.com/sujo030902/port_scanner" target="_blank" rel="noopener">
-          <span class="file-pin" aria-hidden="true"></span>
-          <div class="file-top">
-            <span class="checkbox" aria-hidden="true">&#10003;</span>
-            <span class="file-title">Recon Scanner</span>
-          </div>
-          <p class="file-excerpt">A terminal-styled web interface for port scanning, service detection, banner grabbing, and report exports.</p>
-          <div class="file-tags"><span class="stamp">Flask</span><span class="stamp">Network</span><span class="stamp">Recon</span></div>
+        <a class="rowlink" href="https://github.com/sujo030902/port_scanner" target="_blank" rel="noopener">
+          <div class="row-grid"><span class="row-date">p02</span><span class="row-title">Recon Scanner</span><span class="row-arrow" aria-hidden="true">&#8599;</span></div>
+          <p class="row-desc">Terminal-styled web UI for port scans, service detection, banners, exports.</p>
+          <ul class="tags"><li>flask</li><li>network</li><li>recon</li></ul>
         </a>
       </li>
       <li>
-        <a class="file" href="https://github.com/sujo030902/Phishing-Simulator" target="_blank" rel="noopener">
-          <span class="file-pin" aria-hidden="true"></span>
-          <div class="file-top">
-            <span class="checkbox" aria-hidden="true">&#10003;</span>
-            <span class="file-title">Phishing Simulator</span>
-          </div>
-          <p class="file-excerpt">An AI-assisted awareness tool that generates campaign scenarios and explains phishing-email red flags.</p>
-          <div class="file-tags"><span class="stamp">Gemini AI</span><span class="stamp">Awareness</span></div>
+        <a class="rowlink" href="https://github.com/sujo030902/Phishing-Simulator" target="_blank" rel="noopener">
+          <div class="row-grid"><span class="row-date">p03</span><span class="row-title">Phishing Simulator</span><span class="row-arrow" aria-hidden="true">&#8599;</span></div>
+          <p class="row-desc">AI-assisted awareness tool. Builds campaign scenarios, explains red flags.</p>
+          <ul class="tags"><li>gemini ai</li><li>awareness</li></ul>
         </a>
       </li>
     </ul>
   </section>
 
-  <section id="writing" class="entry">
-    <div class="entry-head">
-      <span class="entry-no">3</span>
-      <h2 class="entry-title">Recent writing</h2>
-      <span class="entry-date">2025 &ndash; 2026</span>
-      <svg class="head-doodle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path pathLength="1" d="M4 15 C 8 9, 11 18, 15 12 S 19 10, 20 10"/><path pathLength="1" d="M4 20h16"/></svg>
-      <a class="entry-side-link" href="https://medium.com/@dhksujal03" target="_blank" rel="noopener">all posts &rarr;</a>
-    </div>
-    <ul class="files">
+  <section class="sec reveal" id="writing" aria-labelledby="write-h">
+    <div class="sec-head"><h2 id="write-h">recent writing</h2><a class="sec-side" href="https://medium.com/@dhksujal03" target="_blank" rel="noopener">all posts -&gt;</a></div>
+    <p class="sec-sub">Lab notes and lessons. 2025–2026.</p>
+    <ul class="rows">
       <li>
-        <a class="file" href="https://medium.com/@dhksujal03/wgel-thm-writeup-66d12062822e" target="_blank" rel="noopener">
-          <div class="file-top">
-            <span class="checkbox" aria-hidden="true">&#10003;</span>
-            <span class="file-title">Wgel THM WriteUp</span>
-            <span class="file-date">2025</span>
-          </div>
-          <p class="file-excerpt">A beginner-level CTF challenge.</p>
-          <div class="file-tags"><span class="stamp">Writeup</span></div>
+        <a class="rowlink" href="https://medium.com/@dhksujal03/wgel-thm-writeup-66d12062822e" target="_blank" rel="noopener">
+          <div class="row-grid"><span class="row-date">2025</span><span class="row-title">Wgel THM WriteUp</span><span class="row-arrow" aria-hidden="true">&#8599;</span></div>
+          <p class="row-desc">Beginner CTF walkthrough, step by step.</p>
         </a>
       </li>
       <li>
-        <a class="file" href="https://medium.com/@dhksujal03/how-i-generated-logs-inside-windows-event-viewer-3f43b63382ee" target="_blank" rel="noopener">
-          <div class="file-top">
-            <span class="checkbox" aria-hidden="true">&#10003;</span>
-            <span class="file-title">How I Generated Windows Logs</span>
-            <span class="file-date">2025</span>
-          </div>
-          <p class="file-excerpt">Exploring Windows Event Viewer with intent.</p>
-          <div class="file-tags"><span class="stamp">Windows</span></div>
+        <a class="rowlink" href="https://medium.com/@dhksujal03/how-i-generated-logs-inside-windows-event-viewer-3f43b63382ee" target="_blank" rel="noopener">
+          <div class="row-grid"><span class="row-date">2025</span><span class="row-title">How I Generated Windows Logs</span><span class="row-arrow" aria-hidden="true">&#8599;</span></div>
+          <p class="row-desc">Windows Event Viewer, explored with intent.</p>
         </a>
       </li>
       <li>
-        <a class="file" href="https://medium.com/@dhksujal03/how-i-used-hydra-to-brute-force-dvwa-70f9c6f5a6f0" target="_blank" rel="noopener">
-          <div class="file-top">
-            <span class="checkbox" aria-hidden="true">&#10003;</span>
-            <span class="file-title">How I Used Hydra to Brute-force DVWA</span>
-            <span class="file-date">2026</span>
-          </div>
-          <p class="file-excerpt">A controlled exercise in authentication attacks.</p>
-          <div class="file-tags"><span class="stamp">Lab note</span></div>
+        <a class="rowlink" href="https://medium.com/@dhksujal03/how-i-used-hydra-to-brute-force-dvwa-70f9c6f5a6f0" target="_blank" rel="noopener">
+          <div class="row-grid"><span class="row-date">2026</span><span class="row-title">Hydra vs DVWA Login</span><span class="row-arrow" aria-hidden="true">&#8599;</span></div>
+          <p class="row-desc">Controlled auth-attack exercise in the lab.</p>
         </a>
       </li>
       <li>
-        <a class="file" href="https://medium.com/@dhksujal03/how-my-first-two-bug-bounty-reports-got-rejected-0612e6190789" target="_blank" rel="noopener">
-          <div class="file-top">
-            <span class="checkbox" aria-hidden="true">&#10003;</span>
-            <span class="file-title">When My First Reports Got Rejected</span>
-            <span class="file-date">2026</span>
-          </div>
-          <p class="file-excerpt">Lessons from informative and rejected reports.</p>
-          <div class="file-tags"><span class="stamp">Reflection</span></div>
+        <a class="rowlink" href="https://medium.com/@dhksujal03/how-my-first-two-bug-bounty-reports-got-rejected-0612e6190789" target="_blank" rel="noopener">
+          <div class="row-grid"><span class="row-date">2026</span><span class="row-title">When My First Reports Got Rejected</span><span class="row-arrow" aria-hidden="true">&#8599;</span></div>
+          <p class="row-desc">What informative + rejected reports taught me.</p>
         </a>
       </li>
     </ul>
   </section>
 
-  <section id="experience" class="entry">
-    <div class="entry-head">
-      <span class="entry-no">4</span>
-      <h2 class="entry-title">Experience</h2>
-      <span class="entry-date">jan &ndash; apr 2026</span>
-      <svg class="head-doodle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M12 4 C 17 4, 20 8, 20 12 S 17 20, 12 20 S 4 16, 4 12 S 7 4, 12 4"/><path pathLength="1" d="M9 12l2 2 4-4"/></svg>
-    </div>
+  <section class="sec reveal" id="experience" aria-labelledby="exp-h">
+    <div class="sec-head"><h2 id="exp-h">experience</h2></div>
+    <p class="sec-sub">jan – apr 2026.</p>
     <div class="job">
       <div class="job-top">
-        <span class="job-date">jan&ndash;apr 2026</span>
-        <span class="job-title">Security Researcher, NKSkillEdge Pvt. Ltd.</span>
+        <span class="job-date">jan–apr 2026</span>
+        <span class="job-role">Security Researcher — NKSkillEdge Pvt. Ltd.</span>
         <span class="job-tag">AppSec</span>
       </div>
-      <p class="job-desc">Performed application-security research and testing, prepared reports and process documentation, and helped identify security-relevant gaps early in development.</p>
+      <p class="job-desc">App-security research and testing. Wrote reports and process docs. Flagged gaps early in development.</p>
     </div>
   </section>
 
-  <section id="contact" class="entry">
-    <div class="entry-head">
-      <span class="entry-no">5</span>
-      <h2 class="entry-title">Contact</h2>
-      <svg class="head-doodle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M12 20 C 7 15, 4 12, 4 8.5 C 4 6, 6 4.5, 8.5 4.5 C 10 4.5, 11.3 5.3, 12 6.5 C 12.7 5.3, 14 4.5, 15.5 4.5 C 18 4.5, 20 6, 20 8.5 C 20 12, 17 15, 12 20z"/></svg>
+  <section class="sec reveal" id="contact" aria-labelledby="contact-h" style="border-bottom:none">
+    <div class="sec-head"><h2 id="contact-h">contact</h2></div>
+    <p class="sec-sub">Best way to reach me is email. Resume stays up to date.</p>
+    <div class="contact-box">
+      <p>$ send a note — I reply fast.</p>
+      <a class="contact-mail" href="mailto:dhksujal@gmail.com">dhksujal@gmail.com</a>
+      <div class="contact-row">
+        <a class="btn btn-primary" href="mailto:dhksujal@gmail.com">write email</a>
+        <a class="btn btn-ghost" href="Sujal_Dhoke_VAPT_Resume.pdf" target="_blank" rel="noopener">resume.pdf</a>
+      </div>
     </div>
-    <p class="contact-note">The best way to reach me is <a href="mailto:dhksujal@gmail.com">dhksujal@gmail.com</a> &mdash; I also keep my <a href="Sujal_Dhoke_VAPT_Resume.pdf" target="_blank" rel="noopener">resume</a> <span class="hl">up to date</span>.</p>
   </section>
   </main>
 </div>
 
-<footer class="site-footer">
-  <a class="footer-sign" href="#about">&copy; <span id="year">2026</span> Sujal Dhoke</a>
-  <div class="footer-right">
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#writing">Writing</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <nav class="footer-logos" aria-label="Social links">
-      <a href="https://github.com/sujo030902" target="_blank" rel="noopener noreferrer" aria-label="Github">
-        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="18" width="18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/sujal-dhoke-3718b5346/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="18" width="18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-      </a>
-      <a href="https://x.com/SujalDhoke03" target="_blank" rel="noopener noreferrer" aria-label="X">
-        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-      </a>
-    </nav>
+<footer>
+  <div class="wrap">
+    <div class="foot-base">
+      <span>&copy; <span id="year">2026</span> Sujal Dhoke</span>
+      <button class="theme-foot" id="themeFoot" type="button">press <kbd>T</kbd> to flip theme</button>
+    </div>
   </div>
 </footer>
-
-<div class="theme-swap" id="theme-swap" aria-hidden="true">
-  <svg class="swap-sun" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
-    <ellipse pathLength="1" cx="32" cy="32" rx="27" ry="25"/>
-    <circle pathLength="1" cx="32" cy="32" r="10"/>
-    <path pathLength="1" d="M32 9v6M32 49v6M9 32h6M49 32h6M16 16l4.5 4.5M43.5 43.5L48 48M48 16l-4.5 4.5M20.5 43.5L16 48"/>
-  </svg>
-  <svg class="swap-moon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <ellipse pathLength="1" cx="32" cy="32" rx="27" ry="25"/>
-    <path pathLength="1" d="M41 39 A19 19 0 1 1 41 13 A15.5 15.5 0 1 0 41 39 Z"/>
-    <path pathLength="1" d="M50 10l1.2 2.8 2.8 1.2-2.8 1.2L50 18l-1.2-2.8L46 14l2.8-1.2z"/>
-  </svg>
-</div>
 
 <script>
 (function(){
   var root=document.documentElement,
-      btn=document.getElementById('theme'),
-      nav=document.querySelector('.main-nav'),
-      toggle=document.getElementById('nav-toggle'),
-      meta=document.getElementById('theme-color');
-  function paintMeta(){
-    meta.content=root.getAttribute('data-theme')==='dark'?'#171410':'#fcfbf4';
+      meta=document.getElementById('theme-color'),
+      foot=document.getElementById('themeFoot');
+  /* boot splash — fake eased progress like plymouth, ~1.1s, every load */
+  (function boot(){
+    var overlay=document.getElementById('boot');
+    if(!overlay)return;
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function finish(){overlay.classList.add('done');document.body.classList.remove('booting');setTimeout(function(){overlay.remove();},400);}
+    if(reduce){overlay.style.transition='none';finish();return;}
+    document.body.classList.add('booting');
+    var fill=document.getElementById('bootFill'),msg=document.getElementById('bootMsg');
+    var msgs=['mounting /dev/portfolio','loading theme tokens','starting portfolio.service','welcome, guest'];
+    var start=null,dur=1100;
+    function frame(t){
+      if(!start)start=t;
+      var r=Math.min((t-start)/dur,1),e=1-(1-r)*(1-r);
+      fill.style.width=(e*100).toFixed(1)+'%';
+      msg.innerHTML='<span class="ok">[ OK ]</span> '+msgs[Math.min(Math.floor(r*msgs.length),msgs.length-1)];
+      if(r<1){requestAnimationFrame(frame);}else{setTimeout(finish,250);}
+    }
+    requestAnimationFrame(frame);
+  })();
+  function paint(){
+    var dark=root.getAttribute('data-theme')!=='light';
+    meta.content=dark?'#1a1b26':'#fffcf0';
+    root.style.backgroundColor=dark?'#1a1b26':'#fffcf0';
   }
-  paintMeta();
-  if(btn){
-    var isDark=root.getAttribute('data-theme')==='dark';
-    btn.setAttribute('aria-pressed',isDark?'true':'false');
-    btn.setAttribute('aria-label','Switch to '+(isDark?'light':'dark')+' mode');
-    btn.addEventListener('click',function(){
-      var dark=root.getAttribute('data-theme')!=='dark';
-      var swap=document.getElementById('theme-swap');
-      var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function apply(){
-        root.setAttribute('data-theme',dark?'dark':'light');
-        root.style.backgroundColor=dark?'#171410':'#fcfbf4';
-        try{localStorage.setItem('theme',dark?'dark':'light');}catch(e){}
-        btn.setAttribute('aria-pressed',dark?'true':'false');
-        btn.setAttribute('aria-label','Switch to '+(dark?'light':'dark')+' mode');
-        paintMeta();
-      }
-      btn.classList.remove('swap-play');
-      void btn.offsetWidth;
-      btn.classList.add('swap-play');
-      if(swap&&!reduce){
-        swap.classList.remove('play','to-dark','to-light');
-        void swap.offsetWidth;
-        swap.classList.add('play',dark?'to-dark':'to-light');
-        setTimeout(apply,180);
-        setTimeout(function(){swap.classList.remove('play');},750);
-      }else{
-        apply();
-      }
-    });
+  paint();
+  function swap(){
+    var dark=root.getAttribute('data-theme')!=='light';
+    root.setAttribute('data-theme',dark?'light':'dark');
+    try{localStorage.setItem('sujo-theme',dark?'light':'dark');}catch(e){}
+    paint();
   }
-  function closeMenu(){
-    nav.classList.remove('nav-open');
-    toggle.setAttribute('aria-expanded','false');
-    toggle.setAttribute('aria-label','Open menu');
+  function toggle(){
+    if(document.startViewTransition){document.startViewTransition(swap);}else{swap();}
   }
-  if(toggle){
-    toggle.addEventListener('click',function(e){
-      e.stopPropagation();
-      var open=nav.classList.toggle('nav-open');
-      toggle.setAttribute('aria-expanded',open?'true':'false');
-      toggle.setAttribute('aria-label',open?'Close menu':'Open menu');
-    });
-    document.addEventListener('click',function(e){
-      if(nav.classList.contains('nav-open')&&!nav.contains(e.target))closeMenu();
-    });
-    document.addEventListener('keydown',function(e){
-      if(e.key==='Escape')closeMenu();
-    });
-    [].forEach.call(document.querySelectorAll('.nav-links a'),function(a){
-      a.addEventListener('click',closeMenu);
-    });
-    window.addEventListener('resize',closeMenu);
-  }
-  var entries=document.querySelectorAll('.entry');
+  foot.addEventListener('click',toggle);
+  document.addEventListener('keydown',function(e){
+    if((e.key==='t'||e.key==='T')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){
+      var tag=(document.activeElement&&document.activeElement.tagName)||'';
+      if(tag!=='INPUT'&&tag!=='TEXTAREA'){toggle();}
+    }
+  });
+  var els=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(e.isIntersecting){e.target.classList.add('inview');io.unobserve(e.target);}
-      });
-    },{threshold:.2});
-    entries.forEach(function(el){io.observe(el);});
-  }else{
-    entries.forEach(function(el){el.classList.add('inview');});
-  }
+      es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:.12});
+    els.forEach(function(el){io.observe(el);});
+  }else{els.forEach(function(el){el.classList.add('in');});}
   document.getElementById('year').textContent=new Date().getFullYear();
 })();
 </script>
